@@ -30,7 +30,7 @@ class VisitLog
         $data = $this->getData();
 
         if (config('visitlog.unique')) {
-            $model = VisitLogModel::where('ip', $this->getUserIP())->first();
+            $model = VisitLogModel::firstOrCreate('ip', $this->getUserIP());
 
             if ($model) {
                 // update record of same IP eg new visit times, etc
